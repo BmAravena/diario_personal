@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from diario_personal.views import home
 
+handler404 = 'diario_personal.views.not_found'
+
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
