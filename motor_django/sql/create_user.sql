@@ -1,0 +1,2 @@
+CREATE USER 'benja'@'%' IDENTIFIED BY '123';
+

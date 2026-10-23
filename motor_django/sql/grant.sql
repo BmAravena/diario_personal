@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON diario_personal.* TO 'benja'@'%';
