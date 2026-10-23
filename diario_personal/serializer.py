@@ -14,8 +14,7 @@ from .models import (
 class AdjuntoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Adjunto
-        #fields = '__all__' # Get all fields from the model
-        fields = ['nombre', 'tipo', 'ruta', 'entrada'] # Get specific fields from the model
+        fields = '__all__'
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
