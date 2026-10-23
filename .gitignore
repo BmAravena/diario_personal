@@ -10,9 +10,7 @@ __pycache__/
 *.so
 
 # Variables de entorno y secretos
-.env
-.env.*
-!.env.example
+
 
 # Django
 db.sqlite3
