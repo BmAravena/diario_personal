@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from diario_personal.views import home
 
 handler404 = 'diario_personal.views.not_found'
@@ -23,4 +23,5 @@ handler404 = 'diario_personal.views.not_found'
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
+    path('diario_personal/', include('diario_personal.urls'))
 ]

@@ -1,7 +1,17 @@
 {% extends 'diario_personal/base.html' %}
 
 {% block content %}
-    <section class="page-content">
-        <h1>Diario personal</h1>
+    <section class="card app-card text-center p-4 p-md-5 shadow-sm">
+        <div class="card-body">
+            <span class="badge text-bg-primary mb-4">Tu espacio personal</span>
+            <h1 class="display-4 fw-bold text-primary mb-3">Diario personal</h1>
+            <p class="lead text-body-secondary mb-4">
+                Escribe, organiza y revisa tus entradas en un solo lugar.
+            </p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <a class="btn btn-primary px-4 py-2" href="{% url 'home' %}">Comenzar</a>
+                <a class="btn btn-outline-primary px-4 py-2" href="{% url 'home' %}">Ver mis entradas</a>
+            </div>
+        </div>
     </section>
 {% endblock %}
