@@ -16,5 +16,5 @@ enrutador.register(r'usuarios', views.UsuarioViewSet)
 
 urlpatterns = [
     path('', include(enrutador.urls)),
-    path('usuarios/', views.UserListView.as_view(), name='listado_usuarios'),
+    path('lista-usuarios/', views.UserListView.as_view(), name='listado_usuarios'),
 ]

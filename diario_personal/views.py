@@ -70,6 +70,11 @@ class UserListView(ListView):
 	template_name = 'diario_personal/user_list.html'
 	context_object_name = 'users'
 
+class CategoriaListView(ListView):
+	model = Categoria
+	template_name = 'diario_personal/categoria_list.html'
+	context_object_name = 'categorias'
+
 # Main
 def home(request):
 	return render(request, 'diario_personal/home.html')

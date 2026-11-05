@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Diario personal{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}?v=brite-20261022-2">
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}?v=brite-20261022-2">
+    <link rel="stylesheet" href="{% static 'css/aesthetic.css' %}?v=vapor-20261029-1">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}?v=20261105-1">
+
     <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}?v=1">
+    <script src="{% static 'js/jquery_v4.0.0.js' %}"></script>
+    <script src="{% static 'js/datatables.js'%}"></script>
     
 </head>
 <body>
@@ -37,4 +40,7 @@
 
     <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </body>
+{% block script %}
+    
+{% endblock %}
 </html>

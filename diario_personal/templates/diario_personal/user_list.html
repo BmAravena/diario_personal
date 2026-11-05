@@ -1,6 +1,59 @@
-{% load static %}
+{% extends 'diario_personal/base.html' %}
+
+{% block title %}Lista de usuarios | Diario personal{% endblock %}
 
 {% block content %}
-    <h3>Lista de usuarios</h3>
+    <section class="w-100 card border-primary shadow-sm user-list-card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h3 mb-0">Lista de usuarios</h1>
+        </div>
+        <div class="card-body">
+            {% if users %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered align-middle mb-0 user-list-table" id="example">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo electrónico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.get_full_name|default:"—" }}</td>
+                                    <td>{{ user.email|default:"—" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-body-secondary mb-0">No hay usuarios registrados.</p>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
-
+{% block script %}
+    <script>
+        new DataTable('#example', {
+            language: {
+                emptyTable: 'No hay usuarios registrados.',
+                info: 'Mostrando _START_ a _END_ de _TOTAL_ usuarios',
+                infoEmpty: 'No hay usuarios para mostrar',
+                infoFiltered: '(filtrado de _MAX_ usuarios en total)',
+                lengthMenu: 'Mostrar _MENU_ usuarios por página',
+                search: 'Buscar:',
+                zeroRecords: 'No se encontraron usuarios',
+                paginate: {
+                    first: 'Primera',
+                    last: 'Última',
+                    next: 'Siguiente',
+                    previous: 'Anterior'
+                }
+            }
+        });
+    </script>
+{% endblock %}
+    
