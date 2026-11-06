@@ -1,0 +1,65 @@
+{% extends 'diario_personal/base.html' %}
+
+{% block title %}Lista de comentarios | Diario personal{% endblock %}
+
+{% block content %}
+    <div class="category-list-page">
+        <div class="user-list-actions">
+            <a href="{% url 'agregar_comentario' %}" class="btn btn-primary">Agregar comentario</a>
+        </div>
+        <section class="w-100 card border-primary shadow-sm category-list-card">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Lista de comentarios</h1>
+            </div>
+            <div class="card-body">
+                {% if comentarios %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered align-middle mb-0 category-list-table" id="comments-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Contenido</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for comentario in comentarios %}
+                                    <tr>
+                                        <td>{{ comentario.contenido }}</td>
+                                        <td>{{ comentario.fecha|default:"—"|linebreaksbr }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-body-secondary mb-0">No hay comentarios registrados.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        const commentsTable = document.querySelector('#comments-table');
+        if (commentsTable) {
+            new DataTable(commentsTable, {
+            language: {
+                emptyTable: 'No hay comentarios registrados.',
+                info: 'Mostrando _START_ a _END_ de _TOTAL_ comentarios',
+                infoEmpty: 'No hay comentarios para mostrar',
+                infoFiltered: '(filtrado de _MAX_ comentarios en total)',
+                lengthMenu: 'Mostrar _MENU_ comentarios por página',
+                search: 'Buscar:',
+                zeroRecords: 'No se encontraron comentarios',
+                paginate: {
+                    first: 'Primera',
+                    last: 'Última',
+                    next: 'Siguiente',
+                    previous: 'Anterior'
+                }
+            }
+            });
+        }
+    </script>
+{% endblock %}
+    

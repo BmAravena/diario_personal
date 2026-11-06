@@ -1,0 +1,65 @@
+{% extends 'diario_personal/base.html' %}
+
+{% block title %}Lista de categorías | Diario personal{% endblock %}
+
+{% block content %}
+    <div class="category-list-page">
+        <div class="user-list-actions">
+            <a href="{% url 'agregar_categoria' %}" class="btn btn-primary">Agregar categoría</a>
+        </div>
+        <section class="w-100 card border-primary shadow-sm category-list-card">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Lista de categorías</h1>
+            </div>
+            <div class="card-body">
+                {% if categorias %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped table-bordered align-middle mb-0 category-list-table" id="category-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Contenido</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for categoria in categorias %}
+                                    <tr>
+                                        <td>{{ categoria.nombre }}</td>
+                                        <td>{{ categoria.descripcion|default:"—"|linebreaksbr }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-body-secondary mb-0">No hay categorías registradas.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        const categoryTable = document.querySelector('#category-table');
+        if (categoryTable) {
+            new DataTable(categoryTable, {
+            language: {
+                emptyTable: 'No hay categorías registradas.',
+                info: 'Mostrando _START_ a _END_ de _TOTAL_ categorías',
+                infoEmpty: 'No hay categorías para mostrar',
+                infoFiltered: '(filtrado de _MAX_ categorías en total)',
+                lengthMenu: 'Mostrar _MENU_ categorías por página',
+                search: 'Buscar:',
+                zeroRecords: 'No se encontraron categorías',
+                paginate: {
+                    first: 'Primera',
+                    last: 'Última',
+                    next: 'Siguiente',
+                    previous: 'Anterior'
+                }
+            }
+            });
+        }
+    </script>
+{% endblock %}
+    

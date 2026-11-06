@@ -1,7 +1,14 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView
 from rest_framework import viewsets
 from . import serializer as ser
+from .forms import (
+	CategoriaCreationForm,
+	ComentarioCreationForm,
+	UsuarioCreationForm,
+	UsuarioUpdateForm,
+)
 
 from .models import (
 	Adjunto,
@@ -75,10 +82,39 @@ class CategoriaListView(ListView):
 	template_name = 'diario_personal/categoria_list.html'
 	context_object_name = 'categorias'
 
+class UserCreateView(CreateView):
+	model = Usuario
+	form_class = UsuarioCreationForm
+	template_name = 'diario_personal/create_user.html'
+	success_url = reverse_lazy('listado_usuarios')
+
+class UserUpdateView(UpdateView):
+	model = Usuario
+	form_class = UsuarioUpdateForm
+	template_name = 'diario_personal/edit_usuario.html'
+	success_url = reverse_lazy('listado_usuarios')
+
+class ComentarioListView(ListView):
+	model = Comentario
+	template_name = 'diario_personal/comentarios_list.html'
+	context_object_name = 'comentarios'
+
+class ComentarioCreateView(CreateView):
+	model = Comentario
+	form_class = ComentarioCreationForm
+	template_name = 'diario_personal/create_comentario.html'
+	success_url = reverse_lazy('listado_comentarios')
+
+class CategoriaCreateView(CreateView):
+	model = Categoria
+	form_class = CategoriaCreationForm
+	template_name = 'diario_personal/create_categoria.html'
+	success_url = reverse_lazy('listado_categorias')
+
+
 # Main
 def home(request):
 	return render(request, 'diario_personal/home.html')
 
 def not_found(request, exception):
 	return render(request, 'diario_personal/not_found.html', status=404)
-

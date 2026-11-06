@@ -23,5 +23,5 @@ handler404 = 'diario_personal.views.not_found'
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
-    path('diario_personal/', include('diario_personal.urls'))
+    path('diario_personal/', include('diario_personal.urls')),
 ]

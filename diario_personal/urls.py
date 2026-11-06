@@ -17,4 +17,10 @@ enrutador.register(r'usuarios', views.UsuarioViewSet)
 urlpatterns = [
     path('', include(enrutador.urls)),
     path('lista-usuarios/', views.UserListView.as_view(), name='listado_usuarios'),
+    path('lista-categorias/', views.CategoriaListView.as_view(), name='listado_categorias'),
+    path('lista-comentarios/', views.ComentarioListView.as_view(), name='listado_comentarios'),
+    path('agregar-comentario/', views.ComentarioCreateView.as_view(), name='agregar_comentario'),
+    path('agregar-usuario/', views.UserCreateView.as_view(), name='agregar_usuario'),
+    path('editar-usuario/<int:pk>/', views.UserUpdateView.as_view(), name='edit_usuario'),
+    path('agregar-categoria/', views.CategoriaCreateView.as_view(), name='agregar_categoria'),
 ]
