@@ -5,7 +5,9 @@ from rest_framework import viewsets
 from . import serializer as ser
 from .forms import (
 	CategoriaCreationForm,
+	CategoriaUpdateForm,
 	ComentarioCreationForm,
+	ComentarioUpdateForm,
 	UsuarioCreationForm,
 	UsuarioUpdateForm,
 )
@@ -72,43 +74,62 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 	queryset = Usuario.objects.all()
 	serializer_class = ser.UsuarioSerializer
 
+# LIST VIEWS
 class UserListView(ListView):
 	model = Usuario
-	template_name = 'diario_personal/user_list.html'
+	template_name = 'diario_personal/usersViews/user_list.html'
 	context_object_name = 'users'
 
 class CategoriaListView(ListView):
 	model = Categoria
-	template_name = 'diario_personal/categoria_list.html'
+	template_name = 'diario_personal/categoriasViews/categoria_list.html'
 	context_object_name = 'categorias'
 
+
+# CREATE VIEWS
 class UserCreateView(CreateView):
 	model = Usuario
 	form_class = UsuarioCreationForm
-	template_name = 'diario_personal/create_user.html'
+	template_name = 'diario_personal/usersViews/create_user.html'
 	success_url = reverse_lazy('listado_usuarios')
 
+
+# UPDATE VIEWS
 class UserUpdateView(UpdateView):
 	model = Usuario
 	form_class = UsuarioUpdateForm
-	template_name = 'diario_personal/edit_usuario.html'
+	template_name = 'diario_personal/usersViews/edit_usuario.html'
 	success_url = reverse_lazy('listado_usuarios')
+
+
+class CategoriaUpdateView(UpdateView):
+	model = Categoria
+	form_class = CategoriaUpdateForm
+	template_name = 'diario_personal/categoriasViews/edit_categoria.html'
+	success_url = reverse_lazy('listado_categorias')
+
 
 class ComentarioListView(ListView):
 	model = Comentario
-	template_name = 'diario_personal/comentarios_list.html'
+	template_name = 'diario_personal/comentariosViews/comentarios_list.html'
 	context_object_name = 'comentarios'
 
 class ComentarioCreateView(CreateView):
 	model = Comentario
 	form_class = ComentarioCreationForm
-	template_name = 'diario_personal/create_comentario.html'
+	template_name = 'diario_personal/comentariosViews/create_comentario.html'
+	success_url = reverse_lazy('listado_comentarios')
+
+class ComentarioUpdateView(UpdateView):
+	model = Comentario
+	form_class = ComentarioUpdateForm
+	template_name = 'diario_personal/comentariosViews/edit_comentarios.html'
 	success_url = reverse_lazy('listado_comentarios')
 
 class CategoriaCreateView(CreateView):
 	model = Categoria
 	form_class = CategoriaCreationForm
-	template_name = 'diario_personal/create_categoria.html'
+	template_name = 'diario_personal/categoriasViews/create_categoria.html'
 	success_url = reverse_lazy('listado_categorias')
 
 

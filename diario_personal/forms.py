@@ -53,8 +53,37 @@ class CategoriaCreationForm(forms.ModelForm):
             "descripcion": forms.Textarea(attrs={"class": "form-control", "rows": 4}),
         }
 
+class CategoriaUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ("nombre", "descripcion")
+        labels = {
+            "nombre": "Nombre",
+            "descripcion": "Descripción",
+        }
+        widgets = {
+            "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "descripcion": forms.Textarea(attrs={"class": "form-control", "rows": 4}),
+        }
+
 
 class ComentarioCreationForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ("entrada", "autor", "contenido")
+        labels = {
+            "entrada": "Entrada",
+            "autor": "Autor",
+            "contenido": "Comentario",
+        }
+        widgets = {
+            "entrada": forms.Select(attrs={"class": "form-select"}),
+            "autor": forms.Select(attrs={"class": "form-select"}),
+            "contenido": forms.Textarea(attrs={"class": "form-control", "rows": 4}),
+        }
+
+
+class ComentarioUpdateForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ("entrada", "autor", "contenido")
