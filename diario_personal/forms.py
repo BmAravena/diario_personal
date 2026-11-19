@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Categoria, Comentario, Usuario
+from .models import Categoria, Comentario, Entrada, Usuario
 
 
 class UsuarioCreationForm(UserCreationForm):
@@ -37,6 +37,28 @@ class UsuarioUpdateForm(forms.ModelForm):
             "email": forms.EmailInput(attrs={"class": "form-control"}),
             "first_name": forms.TextInput(attrs={"class": "form-control"}),
             "last_name": forms.TextInput(attrs={"class": "form-control"}),
+        }
+
+
+class EntradaUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Entrada
+        fields = ("titulo", "contenido", "autor", "categorias", "estado", "visibilidad")
+        labels = {
+            "titulo": "Título",
+            "contenido": "Contenido",
+            "autor": "Autor",
+            "categorias": "Categorías",
+            "estado": "Estado",
+            "visibilidad": "Visibilidad",
+        }
+        widgets = {
+            "titulo": forms.TextInput(attrs={"class": "form-control"}),
+            "contenido": forms.Textarea(attrs={"class": "form-control", "rows": 8}),
+            "autor": forms.Select(attrs={"class": "form-select"}),
+            "categorias": forms.SelectMultiple(attrs={"class": "form-select"}),
+            "estado": forms.Select(attrs={"class": "form-select"}),
+            "visibilidad": forms.Select(attrs={"class": "form-select"}),
         }
 
 

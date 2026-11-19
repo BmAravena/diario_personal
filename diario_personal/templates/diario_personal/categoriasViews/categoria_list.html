@@ -17,15 +17,28 @@
                         <table class="table table-hover table-striped table-bordered align-middle mb-0 category-list-table" id="category-table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Contenido</th>
-                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for categoria in categorias %}
                                     <tr>
-                                        <td>{{ categoria.nombre }}</td>
+                                        <td>
+                                            <a href="{% url 'detalle_categoria' categoria.pk %}" class="text-decoration-none">
+                                                {{ categoria.nombre }}
+                                            </a>
+                                        </td>
                                         <td>{{ categoria.descripcion|default:"—"|linebreaksbr }}</td>
+                                        <td>
+                                            <a href="{% url 'detalle_categoria' categoria.pk %}" class="btn btn-sm btn-outline-secondary">
+                                                Ver detalle
+                                            </a>
+                                            <a href="{% url 'edit_categoria' categoria.pk %}" class="btn btn-sm btn-outline-primary">
+                                                Editar
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

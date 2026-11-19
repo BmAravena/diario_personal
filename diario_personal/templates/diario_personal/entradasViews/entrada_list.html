@@ -1,0 +1,77 @@
+{% extends 'diario_personal/base.html' %}
+
+{% block title %}Lista de entradas | Diario personal{% endblock %}
+
+{% block content %}
+    <section class="w-100 card border-primary shadow-sm category-list-card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h3 mb-0">Lista de entradas</h1>
+        </div>
+        <div class="card-body">
+            {% if entradas %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered align-middle mb-0" id="entries-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entrada in entradas %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'detalle_entrada' entrada.pk %}" class="text-decoration-none">
+                                            {{ entrada.titulo }}
+                                        </a>
+                                    </td>
+                                    <td>{{ entrada.autor.get_full_name|default:entrada.autor.username }}</td>
+                                    <td>{{ entrada.get_estado_display }}</td>
+                                    <td>{{ entrada.fecha_creacion|date:"d/m/Y H:i" }}</td>
+                                    <td>
+                                        <a href="{% url 'detalle_entrada' entrada.pk %}" class="btn btn-sm btn-outline-secondary">
+                                            Ver detalle
+                                        </a>
+                                        <a href="{% url 'edit_entrada' entrada.pk %}" class="btn btn-sm btn-outline-primary">
+                                            Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-body-secondary mb-0">No hay entradas registradas.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const entriesTable = document.querySelector('#entries-table');
+        if (entriesTable) {
+            new DataTable(entriesTable, {
+                language: {
+                    emptyTable: 'No hay entradas registradas.',
+                    info: 'Mostrando _START_ a _END_ de _TOTAL_ entradas',
+                    infoEmpty: 'No hay entradas para mostrar',
+                    infoFiltered: '(filtrado de _MAX_ entradas en total)',
+                    lengthMenu: 'Mostrar _MENU_ entradas por página',
+                    search: 'Buscar:',
+                    zeroRecords: 'No se encontraron entradas',
+                    paginate: {
+                        first: 'Primera',
+                        last: 'Última',
+                        next: 'Siguiente',
+                        previous: 'Anterior'
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

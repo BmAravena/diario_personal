@@ -19,13 +19,26 @@
                                 <tr>
                                     <th scope="col">Contenido</th>
                                     <th scope="col">Fecha</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for comentario in comentarios %}
                                     <tr>
-                                        <td>{{ comentario.contenido }}</td>
-                                        <td>{{ comentario.fecha|default:"—"|linebreaksbr }}</td>
+                                        <td>
+                                            <a href="{% url 'detalle_comentario' comentario.pk %}" class="text-decoration-none">
+                                                {{ comentario.contenido|truncatechars:80 }}
+                                            </a>
+                                        </td>
+                                        <td>{{ comentario.fecha|date:"d/m/Y H:i"|default:"—" }}</td>
+                                        <td>
+                                            <a href="{% url 'detalle_comentario' comentario.pk %}" class="btn btn-sm btn-outline-secondary">
+                                                Ver detalle
+                                            </a>
+                                            <a href="{% url 'edit_comentario' comentario.pk %}" class="btn btn-sm btn-outline-primary">
+                                                Editar
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

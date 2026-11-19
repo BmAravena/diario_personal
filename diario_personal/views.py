@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from rest_framework import viewsets
 from . import serializer as ser
 from .forms import (
@@ -8,6 +8,7 @@ from .forms import (
 	CategoriaUpdateForm,
 	ComentarioCreationForm,
 	ComentarioUpdateForm,
+	EntradaUpdateForm,
 	UsuarioCreationForm,
 	UsuarioUpdateForm,
 )
@@ -80,10 +81,36 @@ class UserListView(ListView):
 	template_name = 'diario_personal/usersViews/user_list.html'
 	context_object_name = 'users'
 
+class UserDetailView(DetailView):
+	model = Usuario
+	template_name = 'diario_personal/usersViews/detail_usuario.html'
+	context_object_name = 'user'
+
 class CategoriaListView(ListView):
 	model = Categoria
 	template_name = 'diario_personal/categoriasViews/categoria_list.html'
 	context_object_name = 'categorias'
+
+class CategoriaDetailView(DetailView):
+	model = Categoria
+	template_name = 'diario_personal/categoriasViews/detail_categoria.html'
+	context_object_name = 'categoria'
+
+class EntradaListView(ListView):
+	model = Entrada
+	template_name = 'diario_personal/entradasViews/entrada_list.html'
+	context_object_name = 'entradas'
+
+class EntradaDetailView(DetailView):
+	model = Entrada
+	template_name = 'diario_personal/entradasViews/detail_entrada.html'
+	context_object_name = 'entrada'
+
+class EntradaUpdateView(UpdateView):
+	model = Entrada
+	form_class = EntradaUpdateForm
+	template_name = 'diario_personal/entradasViews/edit_entrada.html'
+	success_url = reverse_lazy('listado_entradas')
 
 
 # CREATE VIEWS
@@ -105,7 +132,7 @@ class UserUpdateView(UpdateView):
 class CategoriaUpdateView(UpdateView):
 	model = Categoria
 	form_class = CategoriaUpdateForm
-	template_name = 'diario_personal/categoriasViews/edit_categoria.html'
+	template_name = 'diario_personal/categoriasViews/edit_categorias.html'
 	success_url = reverse_lazy('listado_categorias')
 
 
@@ -113,6 +140,11 @@ class ComentarioListView(ListView):
 	model = Comentario
 	template_name = 'diario_personal/comentariosViews/comentarios_list.html'
 	context_object_name = 'comentarios'
+
+class ComentarioDetailView(DetailView):
+	model = Comentario
+	template_name = 'diario_personal/comentariosViews/detail_comentario.html'
+	context_object_name = 'comentario'
 
 class ComentarioCreateView(CreateView):
 	model = Comentario

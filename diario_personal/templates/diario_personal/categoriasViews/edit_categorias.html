@@ -1,11 +1,11 @@
 {% extends 'diario_personal/base.html' %}
 
-{% block title %}Editar usuario | Diario personal{% endblock %}
+{% block title %}Editar categoría | Diario personal{% endblock %}
 
 {% block content %}
     <section class="w-100 card border-primary shadow-sm user-list-card">
         <div class="card-header bg-primary text-white">
-            <h1 class="h3 mb-0">Editar usuario</h1>
+            <h1 class="h3 mb-0">Editar categoría</h1>
         </div>
         <div class="card-body">
             <form method="post">
@@ -28,7 +28,7 @@
                     </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                <a href="{% url 'listado_usuarios' %}" class="btn btn-outline-primary ms-2">Cancelar</a>
+                <a href="{% url 'listado_categorias' %}" class="btn btn-outline-primary ms-2">Cancelar</a>
             </form>
         </div>
     </section>
